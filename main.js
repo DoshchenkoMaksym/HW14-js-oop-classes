@@ -38,7 +38,7 @@ class ToDoList {
     };
 
     findTasks(string) {
-        return this.todos.includes((listItem) => {
+        return this.todos.filter((listItem) => {
             if (listItem.task.includes(string)) {
                 return listItem;
             }
@@ -85,16 +85,7 @@ toDoList.addTodo(task3);
 toDoList.addTodo(task4);
 
 
-console.log(toDoList.findTasks('salt'));
-console.log(toDoList.changeStatus('task3', false));
-toDoList.moveDown('task2');
-console.log('Опускаем таску 2 вниз ', toDoList.todos);
-toDoList.moveDown('task2');
-console.log('Опускаем таску 2 вниз ', toDoList.todos);
-toDoList.moveUp('task4');
-console.log('Поднимаем таску 4 вверх ', toDoList.todos);
-/* console.log(toDoList.todos) */
-/*  // Меняем статус первой таске
+ // Меняем статус первой таске
 toDoList.changeStatus('task1', false);
 
 // Находим таски которые включают букву a
@@ -102,9 +93,5 @@ console.log('Находим таски которые включают букв�
 
 // Поднимаем таску 4 вверх
 toDoList.moveUp('task4');
-console.log('Поднимаем таску 4 вверх ', toDoList.todos);
-
-// Опускаем таску 2 вниз
 toDoList.moveDown('task2');
-console.log('Опускаем таску 2 вниз ', toDoList.todos);
- */
+console.log('Поднимаем таску 4 вверх  и опускаем таску 2 вниз ', toDoList.todos);
