@@ -29,7 +29,7 @@ class ToDoList {
     };
 
     changeStatus(id, status) {
-        this.todos = this.todos.filter(function (listItem) {
+        return this.todos.map(function (listItem) {
             if (listItem.id === id) {
                 listItem.status = status;
             }
@@ -38,7 +38,7 @@ class ToDoList {
     };
 
     findTasks(string) {
-        return this.todos.filter((listItem) => {
+        return this.todos.includes((listItem) => {
             if (listItem.task.includes(string)) {
                 return listItem;
             }
@@ -47,18 +47,18 @@ class ToDoList {
 
     moveUp(id) {
         let itemIndex = this.todos.findIndex((listItem) => listItem.id === id);
-        let findTask = this.todos.find((listItem) => listItem.id === id);
-        if ( itemIndex - 1 >= 0) {
-            this.todos.splice(itemIndex, 1);
-            return this.todos.splice(itemIndex - 1, 0, findTask);
-        };    
+        let findTask = this.todos[itemIndex];
+        let previousTask = this.todos[itemIndex - 1];
+        if (itemIndex - 1 >= 0) {
+            this.todos.splice(itemIndex - 1, itemIndex, findTask, previousTask);
+        };
     };
 
     moveDown(id) {
         let itemIndex = this.todos.findIndex((listItem) => listItem.id === id);
-        let findTask = this.todos.find((listItem) => listItem.id === id);
-        this.todos.splice(itemIndex, 1);
-        return this.todos.splice(itemIndex + 1, 0, findTask);
+        let findTask = this.todos[itemIndex];
+        let nextTask = this.todos[itemIndex + 1];
+        this.todos.splice(itemIndex, itemIndex + 1, nextTask, findTask);
     };
 };
 
@@ -84,16 +84,27 @@ toDoList.addTodo(task2);
 toDoList.addTodo(task3);
 toDoList.addTodo(task4);
 
- // Меняем статус первой таске
+
+console.log(toDoList.findTasks('salt'));
+console.log(toDoList.changeStatus('task3', false));
+toDoList.moveDown('task2');
+console.log('Опускаем таску 2 вниз ', toDoList.todos);
+toDoList.moveDown('task2');
+console.log('Опускаем таску 2 вниз ', toDoList.todos);
+toDoList.moveUp('task4');
+console.log('Поднимаем таску 4 вверх ', toDoList.todos);
+/* console.log(toDoList.todos) */
+/*  // Меняем статус первой таске
 toDoList.changeStatus('task1', false);
 
 // Находим таски которые включают букву a
 console.log('Находим таски которые включают букву a', toDoList.findTasks('a'));
 
-// Поднимаем таску 4 вверх 
+// Поднимаем таску 4 вверх
 toDoList.moveUp('task4');
 console.log('Поднимаем таску 4 вверх ', toDoList.todos);
 
-// Опускаем таску 2 вниз 
+// Опускаем таску 2 вниз
 toDoList.moveDown('task2');
-console.log('Опускаем таску 2 вниз ', toDoList.todos);  
+console.log('Опускаем таску 2 вниз ', toDoList.todos);
+ */
