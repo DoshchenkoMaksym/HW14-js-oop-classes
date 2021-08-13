@@ -29,7 +29,7 @@ class ToDoList {
     };
 
     changeStatus(id, status) {
-        return this.todos.map(function (listItem) {
+        return this.todos.find(function (listItem) {
             if (listItem.id === id) {
                 listItem.status = status;
             }
@@ -87,7 +87,7 @@ toDoList.addTodo(task4);
 
  // Меняем статус первой таске
 toDoList.changeStatus('task1', false);
-
+console.log('Меняем статус первой таске на false ', toDoList.todos)
 // Находим таски которые включают букву a
 console.log('Находим таски которые включают букву a', toDoList.findTasks('a'));
 
